@@ -1,6 +1,7 @@
 package com.example.firestore_example;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -102,10 +105,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
+
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,4 +115,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initUI();
     }
+
+    @Override
+    protected void onStart() {
+        noteRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value,
+                                @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if(error != null){
+                    Toast.makeText(MainActivity.this, "Erreur de chargment !",
+                            Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, error.toString());
+                    return;
+                }
+
+                if(value.exists()){
+                    String titre = value.getString(KEY_TITRE);
+                    String note = value.getString(KEY_NOTE);
+                    tv_showNote.setText("Titre de la note : "+ titre + "\n" + "Note : " + note);
+                } else {
+                    tv_showNote.setText("");
+                }
+            }
+        });
+        super.onStart();
+    }
+
 }
