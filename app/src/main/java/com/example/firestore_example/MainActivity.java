@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_saveNote, tv_showNote;
     //connex a Firestore :
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    //ajout de la ref a la collection :
+    //ajout de la ref a la collection : fgfg
     private DocumentReference noteRef = db.document("ListeDesNotes/Ma première note");
 
     /**
