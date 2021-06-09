@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         initUI();
     }
 
+    // rajout ma 9 juin 11h30
     @Override
     protected void onStart() {
         noteRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
