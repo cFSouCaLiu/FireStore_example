@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity2" >
 
     <EditText
         android:id="@+id/et_titre"
@@ -56,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="updateNote"
             android:text="Update note" />
 
         <Button
@@ -63,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="deleteNote"
             android:text="Supprimer note" />
 
         <Button
@@ -70,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="deleteAll"
             android:text="Tout supprimer" />
     </LinearLayout>
 
